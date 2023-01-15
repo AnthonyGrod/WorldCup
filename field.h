@@ -1,6 +1,7 @@
 #ifndef FIELD_H
 #define FIELD_H
 
+#include <memory>
 #include "player.h"
 
 class Field {
@@ -23,12 +24,12 @@ public:
 
 class Beginning_Field : public Field {
 private:
-    const zdzislaw_t bonus;
+    zdzislaw_t bonus;
 
 public:
     explicit Beginning_Field(const std::string &field_name)
-            : Field(std::move(field_name)),
-              bonus(50) {   
+            : Field(std::move(field_name)) {
+        bonus = 50;
     }
 
     void on_landing(std::shared_ptr<Player> player) override {
@@ -77,7 +78,7 @@ public:
 
 class Goal_Field : public Field {
 private:
-    const zdzislaw_t bonus;
+    zdzislaw_t bonus;
 
 public:
     explicit Goal_Field(const std::string &field_name, zdzislaw_t bonus)
@@ -115,15 +116,15 @@ public:
 
 class Match_Field : public Field {
 private:
-    const zdzislaw_t rate;
-    const double weight;
+    zdzislaw_t rate;
+    double weight;
     zdzislaw_t cumulation;
 public:
     explicit Match_Field(const std::string &field_name, zdzislaw_t rate, double weight)
             : Field(std::move(field_name)),
               rate(rate),
-              weight(weight),
-              cumulation(0) {
+              weight(weight) {
+        cumulation = 0;
     }
 
     void on_landing(std::shared_ptr<Player> player) override {
@@ -140,14 +141,14 @@ public:
 
 class Bookmaker_Field : public Field {
 private:
-    const zdzislaw_t rate;
+    zdzislaw_t rate;
     size_t lucky_element;
 
 public:
     explicit Bookmaker_Field(const std::string &field_name, zdzislaw_t rate)
             : Field(std::move(field_name)),
-              rate(rate),
-              lucky_element(0) {
+              rate(rate) {
+        lucky_element = 0;
     }
 
     void on_landing(std::shared_ptr<Player> player) override {
