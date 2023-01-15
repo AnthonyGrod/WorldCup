@@ -5,6 +5,26 @@
 #include <vector>
 #include "field.h"
 
+class Dices {
+public:
+    std::vector< std::shared_ptr<Die> > dices;
+
+    void add_die(std::shared_ptr<Die>& dice) {
+        dices.push_back(dice);
+    }
+
+    [[nodiscard]] unsigned short roll() const {
+        unsigned short result = 0;
+        for (auto& it : dices)
+            result += it->roll();
+        return result;
+    }
+
+    size_t size() const {
+        return dices.size();
+    }
+};
+
 class GameBoard {
 private:
     std::vector< std::shared_ptr<Field> > fields;
@@ -17,7 +37,7 @@ public:
         fields.push_back(std::make_shared<Yellow_Card>("Żółta kartka", 3));
         fields.push_back(std::make_shared<Match_Field>("Mecz z Meksykiem", 300, 2.5));
         fields.push_back(std::make_shared<Match_Field>("Mecz z Arabią Saudyjską", 280, 2.5));
-        fields.push_back(std::make_shared<Bookmaker_Field>("Bukmacher", 100));
+        fields.push_back(std::make_shared<Bookmaker_Field>("Bukmacher", 300));
         fields.push_back(std::make_shared<Match_Field>("Mecz z Argentyną", 250, 2.5));
         fields.push_back(std::make_shared<Goal_Field>("Gol", 120));
         fields.push_back(std::make_shared<Match_Field>("Mecz z Francją", 400, 4));
@@ -30,4 +50,3 @@ public:
 };
 
 #endif //WORLDCUP_BOARD_H
-
