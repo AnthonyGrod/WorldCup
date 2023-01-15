@@ -40,7 +40,6 @@ public:
         return bankrupt;
     }
 
-
     std::string get_info() const {
         if (bankrupt) {
             return "*** bankrut ***";
