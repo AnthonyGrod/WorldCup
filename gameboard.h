@@ -20,7 +20,7 @@ public:
         fields.push_back(std::make_shared<Bookmaker_Field>("Bukmacher", 100));
         fields.push_back(std::make_shared<Match_Field>("Mecz z Argentyną", 250, 2.5));
         fields.push_back(std::make_shared<Goal_Field>("Gol", 120));
-        fields.push_back(std::make_shared<Match_Field>("Mecz z Francją", 400, 3));
+        fields.push_back(std::make_shared<Match_Field>("Mecz z Francją", 400, 4));
         fields.push_back(std::make_shared<Penalty_Field>("Rzut karny", 180));
     };
 
