@@ -9,7 +9,7 @@
 #include "gameboard.h"
 #include "worldcupexceptions.h"
 
-class WorldCup2022 : WorldCup {
+class WorldCup2022 : public WorldCup {
 private:
     const size_t minPlayersAmount = 2;
     const size_t maxPlayersAmount = 11;
@@ -23,7 +23,7 @@ private:
 
 public:
     WorldCup2022() :
-        gameBoard(std::make_shared<GameBoard>())
+        gameBoard(std::make_shared<GameBoard>()), dices(), players()
     {}
 
     void addDie(std::shared_ptr<Die> die) override {
@@ -34,8 +34,8 @@ public:
         this->players.push_back(std::make_shared<Player>(name));
     }
 
-    void setScoreBoard(std::shared_ptr<ScoreBoard> sb) override {
-        this->scoreBoard = sb;
+    void setScoreBoard(std::shared_ptr<ScoreBoard> scoreboard) override {
+        this->scoreBoard = scoreboard;
     }
 
     void playPreprocessing() {
